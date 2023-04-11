@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekapitulace objednávky</title>
+</head>
+<body>
+    <div id="recap"></div>
+    <script>
+        const recapList = document.getElementById('recap')
+        let params = new URL(document.location).searchParams;
+        let pricePerUnit = parseInt(params.get("cena produktu"));
+        let currency = (params.get("currency"));
+        switch (currency) {
+            case "AUD" : pricePerUnit/=14,423;
+            break;
+            case "BGN" : pricePerUnit/=12,388;
+            break;
+            case "CAD" : pricePerUnit/=15,999;
+            break;
+            case "CAD" : pricePerUnit/=15,999;
+            break;
+            case "CHF" : pricePerUnit/=23,811;
+            break;
+            case "CNY" : pricePerUnit/=3,231;
+            break;
+            case "DKK" : pricePerUnit/=3,252;
+            break;
+            case "EUR" : pricePerUnit/=23,527;
+            break;
+            case "GBP" : pricePerUnit/=26,879;
+            break;
+            case "HKD" : pricePerUnit/=2,828;
+            break;
+            case "HUF" : pricePerUnit/=0,006443;
+            break;
+            case "ILS" : pricePerUnit/=6,173;
+            break;
+            case "JPY" : pricePerUnit/=0,0016402;
+            break;
+            case "MXN" : pricePerUnit/=1,214;
+            break;
+            case "NOK" : pricePerUnit/=2,128;
+            break;
+            case "NZD" : pricePerUnit/=13,932;
+            break;
+            case "PLN" : pricePerUnit/=5,022;
+            break;
+            case "RON" : pricePerUnit/=4,907;
+            break;
+            case "SEK" : pricePerUnit/=2,066;
+            break;
+            case "SGD" : pricePerUnit/=16,704;
+            break;
+            case "THB" : pricePerUnit/=0,0065170;
+            break;
+            case "TRY" : pricePerUnit/=1,153;
+            break;
+            case "USD" : pricePerUnit/=21,557;
+            break;
+            case "ZAR" : pricePerUnit/=1,218;
+            break;
+            default: pricePerUnit/=1;
+        } 
+
+        let amount = parseInt(params.get("počet kusů"));
+        let price = amount*pricePerUnit;
+        
+        recapList.append(`Jméno: ${params.get("jméno")}`);
+        recapList.append(document.createElement('br'))
+        recapList.append(`Příjmení: ${params.get("přijmeni")}`);
+        recapList.append(document.createElement('br'))
+        recapList.append(`Adresa: ${params.get("adresa")}`);
+        recapList.append(document.createElement('br'))
+        recapList.append(`Email: ${params.get("email")}`);
+        recapList.append(document.createElement('br'))
+        recapList.append(`Produkt: ${params.get("název produktu")}`);
+        recapList.append(document.createElement('br'))
+        recapList.append(`Množství: ${params.get("počet kusů")} Ks.`);
+        recapList.append(document.createElement('br'))
+        recapList.append(`Cena za kus: ${pricePerUnit.toFixed(2)} ${currency}`);
+        recapList.append(document.createElement('br'))
+        recapList.append(`cena bez dph: ${price.toFixed(2)} ${currency}`);
+        recapList.append(document.createElement('br'))
+        price*=1.21;
+        recapList.append(`cena s dph(21%): ${price.toFixed(2)} ${currency}`);
+        recapList.append(document.createElement('br'))
+    </script>
+    
+</body>
+</html>
